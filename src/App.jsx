@@ -1,13 +1,29 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { AppProvider } from "./components/Context";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
+
+import SingleBlog from "./pages/SingleBlog"
 
 function App() {
-
   return (
     <>
-      <h1 className='bg-red-500'>Hello world</h1>
+      <AppProvider>
+        <BrowserRouter>
+          <Nav></Nav>
+          <Routes>
+            <Route exact path="/" element={<Home/>}></Route>
+            <Route exact path="/blog/:id" element={<SingleBlog/>}></Route>
+            {/* <Route exact path="/" element={<Home/>}></Route>
+            <Route exact path="/" element={<Home/>}></Route>
+            <Route exact path="/" element={<Home/>}></Route> */}
+          </Routes>
+        </BrowserRouter>
+      </AppProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
