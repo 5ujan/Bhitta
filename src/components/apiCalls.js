@@ -51,13 +51,13 @@ const getAllUsers = async () => {
     return {};
   }
 };
-const updateBlog = async ({ blogID, title, content, tags }) => {
+const updateBlog = async ({ blogID, title, content, tags, comments }) => {
   let info = await JSON.parse(localStorage.getItem("info"));
   console.log(baseUrl + "/blogs/" + blogID);
   console.log(blogID);
   const response = await axios.patch(
     baseUrl + "/blogs/" + blogID,
-    { title, content, tags },
+    { title, content, tags, comments },
     {
       headers: {
         "Content-Type": "application/json",

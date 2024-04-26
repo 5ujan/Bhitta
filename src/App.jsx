@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Editing from "./pages/Editing";
 import SingleBlog from "./pages/SingleBlog";
 import ListByTags from "./pages/ListByTags";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/filter" element={<ListByTags />}></Route>
             {/* <Route exact path="/" element={<Home/>}></Route> */}
           </Routes>
+          <Footer></Footer>
         </BrowserRouter>
       </AppProvider>
     </>

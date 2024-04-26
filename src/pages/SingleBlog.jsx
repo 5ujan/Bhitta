@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaRegHeart } from "react-icons/fa6";
-import { fetchBlog } from "../components/apiCalls";
+import { fetchBlog, updateBlog } from "../components/apiCalls";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import EditBlog from "../components/EditBlog";
 import { ToastContainer, toast } from "react-toastify";
@@ -70,12 +70,14 @@ const SingleBlog = () => {
   // if(info){
   //   const {userID:self} = JSON.parse(info);
   // }
+
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useGlobalContext();
   const { blogID } = useParams();
   const [loading, setLoading] = useState(true);
   const [edit, setEdit] = useState(false);
+  const [comment, setComment] = useState("");
   const [blog, setBlog] = useState([]);
   const asyncWrapper = async () => {
     let temp = await fetchBlog(blogID);
@@ -83,6 +85,58 @@ const SingleBlog = () => {
     setBlog(temp.blog);
     setLoading(false);
   };
+  const handleComment = async (text) => {
+    let hello = toast.loading("Posting Comment...", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    console.log(12312);
+    const now = `${
+      new Date().getMonth() + 1
+    }/${new Date().getDate()} - ${new Date().getHours()}:${new Date().getMinutes()}`;
+    try {
+      const comment = {
+        text,
+        createdBy: {
+          name: user.name,
+          pfp: user.avatar,
+        },
+        createdAt: now,
+      };
+
+      const updated = await updateBlog({
+        blogID,
+        ...blog,
+        comments: [comment, ...blog.comments],
+      });
+      if (!updated) {
+        toast.update(hello, {
+          render: "Something went wrong",
+          type: "failure",
+          autoClose: 1000,
+          isLoading: false,
+        });
+      } else {
+        setBlog(updated.blog);
+        toast.update(hello, {
+          render: "Comment Posted",
+          type: "success",
+          autoClose: 1000,
+          isLoading: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     asyncWrapper();
   }, []);
@@ -153,7 +207,7 @@ const SingleBlog = () => {
                 onClick={() => {
                   handleDeletePost(blogID);
                   setTimeout(() => {
-                    navigate("/blog")
+                    navigate("/blog");
                     window.location.reload();
                   }, 1500);
                 }}
@@ -163,6 +217,55 @@ const SingleBlog = () => {
             </div>
           )}
           <ToastContainer />
+        </div>
+      )}
+      {!loading && !edit && (
+        <div className="h-[20vh] w-[90vw]">
+          <h1 className="text-left text-2xl p-3">Comments</h1>
+          <form
+            className="flex flex-col md:flex-row gap-4"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              value={comment}
+              className="w-full md:w-[80%]  p-3 outline-none focus:outline-black rounded "
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              placeholder="Write a comment"
+            />
+            <button
+              className="bg-black text-white p-2 min-w-[8rem] rounded text-3xl"
+              onClick={() => {
+                handleComment(comment);
+                setComment("");
+                console.log(user);
+              }}
+            >
+              Post
+            </button>
+          </form>
+          <div className="my-[3rem] mb-[10rem]">
+            {blog?.comments?.map((comment) => {
+              return (
+                <div className="flex flex-col w-full min-h-[5rem]">
+                  <div className="flex w-full gap-3">
+                    <img
+                      className="w-[2rem] h-[2rem] rounded-full"
+                      src={comment?.createdBy?.pfp}
+                    />
+                    <h1 className="font-bold mr-[1rem]">
+                      {comment?.createdBy?.name}
+                    </h1>
+                    <h1 className="italic text-gray-700">
+                      {comment?.createdAt}
+                    </h1>
+                  </div>
+                  <h1>{comment?.text}</h1>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
