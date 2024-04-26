@@ -3,10 +3,23 @@ import { FaRegHeart } from "react-icons/fa6";
 import { fetchBlog } from "../components/apiCalls";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import EditBlog from "../components/EditBlog";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "../components/Context";
 import { deleteBlog } from "../components/apiCalls";
 
 const handleDeletePost = async (blogID) => {
+  let hello = toast.loading("Deleting blog...", {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+
   let resp;
   if (blogID) {
     resp = await deleteBlog({ blogID });
@@ -83,12 +96,27 @@ const SingleBlog = () => {
       ) : edit ? (
         <EditBlog props={blog} />
       ) : (
-        <div className="min-h-[80vh] flex  w-[60%] mx-auto justify-evenly gap-4  py-12 px-24">
+        <div className="min-h-[80vh] flex  w-[60%] mx-auto justify-evenly gap-4  py-4 px-24">
           <div className=" flex-1 flex flex-col gap-6">
             <div className="flex flex-col">
               <h1 className={`text-gray-900 font-bold text-[3rem]`}>
                 {blog.title || "This is the title of the post"}
               </h1>
+              <div className="flex items-center">
+                <h1 className="bg-black text-white rounded-lg p-1 font-bold px-2 ">
+                  Tags
+                </h1>
+                <div className="flex-1 flex justify-start">
+                  {blog.tags?.map((el) => (
+                    <h1
+                      className="ml-2 text-black font-bold hover:underline cursor-pointer"
+                      onClick={() => navigate("/filter?tags=" + el)}
+                    >
+                      {"#" + el}
+                    </h1>
+                  ))}
+                </div>
+              </div>
               <div className="flex items-center gap-2">
                 <div className="rounded-full overflow-hidden w-[2rem] bg-red-300">
                   <img src={blog.createdBy && blog.createdBy.avatar} alt="" />
@@ -123,18 +151,10 @@ const SingleBlog = () => {
               <button
                 className="bg-red-600 rounded-full text-white font-bold px-4 p-2"
                 onClick={() => {
-                  // let id = location.pathname.split('/').pop()
-                  // let temp = location.pathname.split('/')
-                  // temp.pop()
-                  // temp.join('/')
-                  // deleteBlog(id);
-                  // navigate(temp)
                   handleDeletePost(blogID);
                   setTimeout(() => {
-                    location.pathname.includes("blog")
-                      ? navigate("/blog")
-                      : navigate("/pastevents");
-                    location.reload();
+                    navigate("/blog")
+                    window.location.reload();
                   }, 1500);
                 }}
               >
@@ -142,7 +162,7 @@ const SingleBlog = () => {
               </button>
             </div>
           )}
-          {/* <ToastContainer /> */}
+          <ToastContainer />
         </div>
       )}
     </div>

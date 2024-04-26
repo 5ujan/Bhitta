@@ -4,10 +4,12 @@ import { CiUser, CiLogout } from "react-icons/ci";
 import { PiUserSwitchThin } from "react-icons/pi";
 import { useGlobalContext } from "./Context";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
   const { user, setUser } = useGlobalContext();
   const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
   const setData = async () => {
     let temp = await fetchData();
     if (temp) {
@@ -42,7 +44,10 @@ export default function Nav() {
     <>
       <div className="w-[100vw] bg-black relative">
         <div className="w-[90vw] mx-auto flex justify-start h-[16vh] items-center">
-          <div className=" flex flex-1  md:flex-none w-[15vw] min-w-[9rem] h-[90%] items-center justify-start">
+          <div
+            className=" flex flex-1  md:flex-none w-[15vw] min-w-[9rem] h-[90%] cursor-pointer items-center justify-start"
+            onClick={() => navigate("./")}
+          >
             <img
               src={bhittaOutline}
               alt=""

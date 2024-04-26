@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllBlogs, fetchData } from "../components/apiCalls.js";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  getAllBlogs,
+  fetchData,
+  getTaggedBlogs,
+} from "../components/apiCalls.js";
 
 import { useGlobalContext } from "../components/Context";
 
-const Home = () => {
+const ListByTags = () => {
   const { user } = useGlobalContext();
   const [blogs, setBlogs] = useState([]);
+  const [searchParams] = useSearchParams();
+  const tags = searchParams.get("tags").split(" ");
+
   useEffect(() => {
     async function asyncWrapper() {
-      let temp = await getAllBlogs();
+      let temp = await getTaggedBlogs(tags);
       setBlogs(temp.blogs);
       console.log(temp.blogs);
     }
@@ -18,27 +25,27 @@ const Home = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="max-w-[90vw] mx-auto">
+    <div className="max-w-[90vw] mx-auto mt-3">
       <div className="min-h-[80vh]">
         {user && user.name && (
           <div className="w-[90vw] mx-auto flex justify-around items-center ">
-            <h1 className="text-lg">
-              Have something you want to share with the world?
-            </h1>
+            <h1 className="text-2xl ">Here Are The Posts Tagged :</h1>
             <div>
-              <button
-                className="mx-auto bg-black text-white font-bold p-4 min-w-[4rem] leading-4 rounded-full my-6"
-                onClick={() => navigate("/blog/create")}
-              >
-                Add New Blog
-              </button>
+              {tags?.map((el) => (
+                <h1
+                  className="ml-2 text-black font-bold hover:underline cursor-pointer"
+                  onClick={() => navigate("/filter?tags=" + el)}
+                >
+                  {"#" + el}
+                </h1>
+              ))}
             </div>
           </div>
         )}
 
         <div>
           {!blogs.length ? (
-            <div className="mt-[40vh] h-[60vh] ml-[45vw] ">
+            <div className="h-[60vh] ml-[45vw] ">
               <img src="/loading.gif" alt="" />
             </div>
           ) : (
@@ -113,4 +120,4 @@ const Home = () => {
     </div>
   );
 };
-export default Home;
+export default ListByTags;

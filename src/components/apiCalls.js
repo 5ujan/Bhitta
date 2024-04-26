@@ -15,12 +15,12 @@ const getImageData = async (file) => {
   }
 };
 
-const postBlog = async ({ title, content, isPastEvent }) => {
+const postBlog = async ({ title, content, tags }) => {
   try {
     let info = await JSON.parse(localStorage.getItem("info"));
     const response = await axios.post(
       baseUrl + "/blogs/new",
-      { title, content, isPastEvent },
+      { title, content, tags },
       {
         headers: {
           "Content-Type": "application/json",
@@ -51,13 +51,13 @@ const getAllUsers = async () => {
     return {};
   }
 };
-const updateBlog = async ({ blogID, title, content, category }) => {
+const updateBlog = async ({ blogID, title, content, tags }) => {
   let info = await JSON.parse(localStorage.getItem("info"));
   console.log(baseUrl + "/blogs/" + blogID);
   console.log(blogID);
   const response = await axios.patch(
     baseUrl + "/blogs/" + blogID,
-    { title, content, category },
+    { title, content, tags },
     {
       headers: {
         "Content-Type": "application/json",
@@ -100,6 +100,14 @@ const getAllBlogs = async () => {
   console.log(response.data);
   return response.data;
 };
+const getTaggedBlogs = async (tags) => {
+  console.log("here", tags);
+  const response = await axios.get(
+    baseUrl + "/blogs/filter?tags=" + tags.join("+")
+  );
+  console.log(response.data);
+  return response.data;
+};
 
 const fetchBlog = async (id) => {
   console.log(id);
@@ -109,13 +117,11 @@ const fetchBlog = async (id) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error, "here");
   }
 };
 
 async function fetchData() {
   let info = JSON.parse(localStorage.getItem("info"));
-  console.log("Here", info);
   if (info && info.token) {
     let { token, userID } = info;
     let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
@@ -134,6 +140,7 @@ export {
   postBlog,
   getImageData,
   getAllBlogs,
+  getTaggedBlogs,
   fetchData,
   fetchBlog,
   updateBlog,

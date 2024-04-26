@@ -18,6 +18,8 @@ const EditBlog = ({ props }) => {
     blocks: props ? (props.content ? props.content : []) : [],
   });
   const [title, setTitle] = useState(props && props.title ? props.title : "");
+  const [tags, setTags] = useState([]);
+  const [inputField, setInputField] = useState("");
 
   const ejInstance = useRef();
   const [isEdit, setEdit] = useState(true);
@@ -26,7 +28,6 @@ const EditBlog = ({ props }) => {
       holder: "editorjs",
       onReady: () => {
         ejInstance.current = editor;
-        
       },
       data: { blocks: content.blocks },
       tools: {
@@ -113,6 +114,27 @@ const EditBlog = ({ props }) => {
               placeholder="Choose a title for your post"
             />
           </form>
+          <div className="flex items-center gap-1">
+            {tags?.map((el, index) => (
+              <h1  key ={index} className="font-bold">{"#"+el}</h1>
+            ))}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setTags([...tags, inputField]);
+                setInputField("");
+              }}
+            >
+              <input
+                value={inputField}
+                className="w-full p-3 outline-none focus:outline-black rounded "
+                onChange={(e) => {
+                  setInputField(e.target.value);
+                }}
+                placeholder="Add a tag"
+              />
+            </form>
+          </div>
           <div
             id="editorjs"
             className="border-gray-500 border-[1px] pt-6 rounded-xl h-[full] min-h-[80vh]"
@@ -124,6 +146,7 @@ const EditBlog = ({ props }) => {
             title,
             content,
             setEdit,
+            tags,
             id: props ? props._id : false,
           }}
         ></Preview>

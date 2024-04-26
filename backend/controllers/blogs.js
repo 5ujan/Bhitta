@@ -12,12 +12,26 @@ const getAllBlogs = async (req, res) => {
     console.log(error);
   }
 };
+const getTaggedBlogs = async (req, res) => {
+  console.log("+==================");
+  try {
+    const tags = req.query.tags;
+    const query = {};
+    query.tags = { $in: tags.split(" ") };
+    console.log(query);
+    const temp = await Blog.find(query);
+    console.log(temp);
+    const blogs = temp.reverse();
+    res.status(200).json({ blogs });
+  } catch (error) {
+    console.log(error);
+  }
+};
 const getBlog = async (req, res) => {
   const id = req.params.id;
   console.log(req.params);
   try {
     const blog = await Blog.findById(id);
-    console.log("reaches");
     res.status(200).json({ blog });
   } catch (error) {
     console.log(error);
@@ -78,4 +92,11 @@ const createBlog = async (req, res) => {
   }
 };
 
-module.exports = { getBlog, createBlog, modifyBlog, getAllBlogs, deleteBlog };
+module.exports = {
+  getBlog,
+  createBlog,
+  modifyBlog,
+  getAllBlogs,
+  deleteBlog,
+  getTaggedBlogs,
+};

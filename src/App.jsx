@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Editing from "./pages/Editing";
 import SingleBlog from "./pages/SingleBlog";
+import ListByTags from "./pages/ListByTags";
 
 function App() {
   return (
@@ -15,10 +16,10 @@ function App() {
           <Nav></Nav>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
-            <Route exact path="/blog/:blogID" element={<SingleBlog />}></Route>
             <Route exact path="/blog/create" element={<Editing />}></Route>
-            {/* <Route exact path="/" element={<Home/>}></Route>
-            <Route exact path="/" element={<Home/>}></Route> */}
+            <Route exact path="/blog/:blogID" element={<SingleBlog />}></Route>
+            <Route exact path="/filter" element={<ListByTags />}></Route>
+            {/* <Route exact path="/" element={<Home/>}></Route> */}
           </Routes>
         </BrowserRouter>
       </AppProvider>
