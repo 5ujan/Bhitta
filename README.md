@@ -23,6 +23,13 @@ npm run dev
  ```
 
 ## prerequisites
+### Url
+- since the code is for production, some changes need to be made in the files
+- uncomment "http://localhost:5173/...." or "http://localhost:6173/"  and comment the public urls
+- files that need changing are ```backend/routes/auth.js```, ```src/components/apiCalls.js```, ```src/components/Nav.jsx```, ```src/pages/Editing.jsx```
+- or simply use the search feature
+- it is setup properly, comment one line uncomment the other, only takes a minute to do 
+### dotenv
 - you'll need a dotenv file with necessary api keys
 ```
 MONGO_URI = your-mongo-uri
