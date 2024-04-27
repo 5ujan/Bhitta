@@ -21,12 +21,14 @@ export default function Nav() {
     setData();
   }, []);
   const handleLogout = () => {
-    window.open("http://localhost:6173/logout", "_self");
+    window.open("https://bhitta.onrender.com/logout", "_self");
+    // window.open("http://localhost:6173/logout", "_self");
     localStorage.removeItem("info");
   };
   const handleLogin = async () => {
     const authWindow = window.open(
-      "http://localhost:6173/auth/google",
+      "https://bhitta.onrender.com/auth/google",
+      // "http://localhost:6173/auth/google",
       "_blank",
       "width=600, height=400"
     );

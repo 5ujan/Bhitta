@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:6173";
+// const baseUrl = "http://localhost:6173";
+const baseUrl = "https://bhitta.onrender.com";
 
 const getImageData = async (file) => {
   const formData = new FormData();
@@ -116,20 +117,23 @@ const fetchBlog = async (id) => {
 
     console.log(response.data);
     return response.data;
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 
 async function fetchData() {
   let info = JSON.parse(localStorage.getItem("info"));
   if (info && info.token) {
     let { token, userID } = info;
-    let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    let userInfo = await axios.get(
+      "https://bhitta.onrender.com/users/" + userID,
+      {
+        // let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(userInfo.data);
     if (userInfo) return userInfo.data;
     else return {};

@@ -15,7 +15,8 @@ authRouter.route("/auth/google/callback").get(
   passport.authenticate("google", {
     session: true,
     successRedirect: "/profile",
-    failureRedirect: "http://localhost:5173/",
+    // failureRedirect: "http://localhost:5173/",
+    failureRedirect: "https://5ujan.github.io/Bhitta/",
   })
 );
 
@@ -27,7 +28,8 @@ authRouter.route("/profile").get(async (req, res) => {
    window.opener.postMessage(${JSON.stringify({
      token,
      userID: req.user._id,
-   })}, 'http://localhost:5173/');
+   })}, 'https://5ujan.github.io/Bhitta/');
+  //  })}, 'http://localhost:5173/');
         window.close();
         </script>
 `
@@ -39,7 +41,8 @@ authRouter.route("/logout").get((req, res) => {
     if (err) {
       return next(err);
     }
-    res.redirect("http://localhost:5173/");
+    res.redirect("https://5ujan.github.io/Bhitta/");
+    // res.redirect("http://localhost:5173/");
   });
 });
 
