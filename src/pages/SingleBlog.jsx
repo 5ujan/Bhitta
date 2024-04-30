@@ -154,7 +154,7 @@ const SingleBlog = () => {
           <div className=" flex-1 flex flex-col gap-6">
             <div className="flex flex-col">
               {user && user._id && blog.createdBy.id === user._id && (
-                <div className=" w-[90vw] flex gap-3 justify-center ">
+                <div className="md:hidden w-[90vw] flex gap-3 justify-center ">
                   <button
                     className="bg-white border-black border-[1px] md:border-[2px] border-solid min-w-[5rem] md:min-w-[10rem] rounded-full text-black text-sm md:text-lg font-bold px-4 p-[0.125rem]  md:p-2"
                     onClick={() => {
