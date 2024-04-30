@@ -17,7 +17,7 @@
 
 ## How to build and run 
 Check [localhost](https://github.com/5ujan/Bhitta/tree/localhost) for complete details
-```git clone https://github.com/5ujan/Bhitta.git```  
+```git clone -b localhost https://github.com/5ujan/Bhitta.git ```  
  ```
 cd Bhitta
 npm install
