@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <AppProvider>
-        <BrowserRouter>
+        <BrowserRouter basename = "/Bhitta">
           <Nav></Nav>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
