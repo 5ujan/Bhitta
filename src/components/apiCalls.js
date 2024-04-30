@@ -125,14 +125,13 @@ async function fetchData() {
   if (info && info.token) {
     let { token, userID } = info;
     // let userInfo = await axios.get("https://bhitta.onrender.com/users/" + userID,{
-        let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    console.log(userInfo.data);
+    let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // console.log(userInfo.data);
     if (userInfo) return userInfo.data;
     else return {};
   }

@@ -52,7 +52,7 @@ const ElementMap = {
     return (
       <div
         key={id}
-        className="w-[60vw] min-w-[10rem] max-w-[45rem] flex flex-col items-center"
+        className="w-[90vw] md:w-[60vw] min-w-[10rem] max-w-[45rem] flex flex-col items-center"
       >
         <img className={`text-gray w-full`} src={data.file.url}></img>
         {data.caption.length !== 0 && (
@@ -150,11 +150,35 @@ const SingleBlog = () => {
       ) : edit ? (
         <EditBlog props={blog} />
       ) : (
-        <div className="min-h-[80vh] flex  w-[60%] mx-auto justify-evenly gap-4  py-4 px-24">
+        <div className="min-h-[60vh] flex w-[90vw] md:w-[60%] mx-auto justify-evenly gap-0 md:gap-4 py-4 md:px-24">
           <div className=" flex-1 flex flex-col gap-6">
             <div className="flex flex-col">
+              {user && user._id && blog.createdBy.id === user._id && (
+                <div className=" w-[90vw] flex gap-3 justify-center ">
+                  <button
+                    className="bg-white border-black border-[1px] md:border-[2px] border-solid min-w-[5rem] md:min-w-[10rem] rounded-full text-black text-sm md:text-lg font-bold px-4 p-[0.125rem]  md:p-2"
+                    onClick={() => {
+                      setEdit(true);
+                    }}
+                  >
+                    Edit Blog
+                  </button>
+                  <button
+                    className="bg-red-600 min-w-[5rem] md:min-w-[10rem] text-sm md:text-lg  rounded-full text-white font-bold px-4 p-2"
+                    onClick={() => {
+                      handleDeletePost(blogID);
+                      setTimeout(() => {
+                        navigate("/blog");
+                        window.location.reload();
+                      }, 1500);
+                    }}
+                  >
+                    Delete Blog
+                  </button>
+                </div>
+              )}
               <h1
-                className={`text-gray-900 font-bold text-[2rem] md:text-[3rem]`}
+                className={`text-gray-900 font-bold text-[2rem] leading-8 md:leading-10 my-2 md:text-[3rem]`}
               >
                 {blog.title || "This is the title of the post"}
               </h1>
@@ -178,7 +202,7 @@ const SingleBlog = () => {
                 <div className="rounded-full overflow-hidden w-[2rem] bg-red-300">
                   <img src={blog.createdBy && blog.createdBy.avatar} alt="" />
                 </div>
-                <h1 className="text-[1.1rem] pr-5 ">
+                <h1 className="text-[1rem] md:text-[1.1rem] pr-5 ">
                   {blog.createdBy && blog.createdBy.name}
                 </h1>
                 <div className="flex items-center gap-1 cursor-pointer">
@@ -196,9 +220,9 @@ const SingleBlog = () => {
             })}
           </div>
           {user && user._id && blog.createdBy.id === user._id && (
-            <div className="w-[25vw] flex flex-col gap-3 p-5 ">
+            <div className="hidden w-[25vw] md:flex flex-col gap-3 p-5 ">
               <button
-                className="bg-white border-black border-[2px] border-solid min-w-[5rem] md:min-w-[10rem] rounded-full text-black text-sm md:text-lg font-bold px-4 p-[0.125rem]  md:p-2"
+                className="bg-white border-black border-[1px] md:border-[2px] border-solid min-w-[5rem] md:min-w-[10rem] rounded-full text-black text-sm md:text-lg font-bold px-4 p-[0.125rem]  md:p-2"
                 onClick={() => {
                   setEdit(true);
                 }}

@@ -111,10 +111,48 @@ const Preview = ({ props }) => {
   };
 
   return (
-    <div className="flex w-[90vw] min-h-[80vh] mx-auto justify-evenly gap-4">
+    <div className="flex w-[90vw] min-h-[80vh] mx-auto justify-evenly md:gap-4">
       <div className=" flex-1 flex flex-col gap-6">
-        <div className="flex flex-col">
-          <h1 className={`text-black font-bold text-[3rem]`}>
+        <div className="flex flex-col ">
+          <div className=" w-[90vw] flex md:hidden justify-center gap-3 pt-3 ">
+            <button
+              className="bg-white hidden md:block border-black border-[2px] border-solid rounded-full text-black font-bold px-4 p-2"
+              onClick={() => {
+                setEdit(true);
+              }}
+            >
+              Back to Editing
+            </button>
+            <button
+              className="bg-white md:hidden min-w-[5rem] border-black border-[2px] border-solid rounded-full text-black font-bold px-4 p-2"
+              onClick={() => {
+                setEdit(true);
+              }}
+            >
+              Edit
+            </button>
+            <button
+              className="bg-black min-w-[5rem] rounded-full text-white font-bold px-4 p-2"
+              onClick={() => {
+                handlePost(id);
+              }}
+            >
+              {id ? "Update" : "Post"}
+            </button>
+            {id ? (
+              <button
+                className="bg-red-700 min-w-[5rem] rounded-full text-white font-bold px-4 p-2"
+                onClick={() => window.location.reload()}
+              >
+                Cancel
+              </button>
+            ) : null}
+          </div>
+
+          <h1
+            className={`text-gray-900 font-bold text-[2rem] leading-8 md:leading-10 my-4 flex-1 md:text-[3rem]`}
+          >
+            {" "}
             {title || "This is the title of the post"}
           </h1>
           <div className="flex items-center mb-2">
@@ -122,8 +160,9 @@ const Preview = ({ props }) => {
               Tags
             </h1>
             <div className="flex-1 flex justify-start">
-              {tags?.map((el) => (
+              {tags?.map((el, index) => (
                 <h1
+                  key={index}
                   className="ml-2 text-black font-bold hover:underline cursor-pointer"
                   onClick={() => navigate("/filter?tags=" + el)}
                 >
@@ -136,7 +175,9 @@ const Preview = ({ props }) => {
             <div className="rounded-full overflow-hidden w-[2.5rem] bg-red-300">
               <img src={user.avatar} alt="" />
             </div>
-            <h1 className="text-[1.1rem]  ">{user.name || "Author's name"}</h1>
+            <h1 className="text-[1rem] md:text-[1.1rem]  ">
+              {user.name || "Author's name"}
+            </h1>
             <div className="flex items-center gap-1 cursor-pointer">
               <FaRegHeart />
               <span>14</span>
@@ -154,7 +195,7 @@ const Preview = ({ props }) => {
             );
           })}
       </div>
-      <div className="w-[25vw] flex flex-col gap-3 p-5 ">
+      <div className="hidden w-[25vw] md:flex flex-col gap-3 p-5 ">
         <button
           className="bg-white hidden md:block border-black border-[2px] border-solid rounded-full text-black font-bold px-4 p-2"
           onClick={() => {

@@ -91,8 +91,8 @@ const EditBlog = ({ props }) => {
   return (
     <>
       {isEdit ? (
-        <div className="w-[70vw] mx-auto my-[7rem] flex flex-col gap-5">
-          <div className="flex justify-start items-center ">
+        <div className="w-[90vw] md:w-[70vw] mx-auto my-[1rem] md:my-[7rem] flex flex-col md:gap-5 gap-2">
+          <div className="flex md:flex-row flex-col justify-start items-center ">
             <h1 className="text-gray-900 font-bold text-lg flex-1">
               Edit your blog below and when you're ready click the button aside
               to preview
@@ -116,7 +116,9 @@ const EditBlog = ({ props }) => {
           </form>
           <div className="flex items-center gap-1">
             {tags?.map((el, index) => (
-              <h1  key ={index} className="font-bold">{"#"+el}</h1>
+              <h1 key={index} className="font-bold">
+                {"#" + el}
+              </h1>
             ))}
             <form
               onSubmit={(e) => {
@@ -131,7 +133,7 @@ const EditBlog = ({ props }) => {
                 onChange={(e) => {
                   setInputField(e.target.value);
                 }}
-                placeholder="Add a tag (no spaces, spaces will be removed)"
+                placeholder="Add a tag (no spaces)"
               />
             </form>
           </div>

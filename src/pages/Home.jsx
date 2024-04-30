@@ -27,10 +27,16 @@ const Home = () => {
             </h1>
             <div>
               <button
-                className="mx-auto bg-black text-white font-bold p-4 min-w-[4rem] leading-4 rounded-full my-6"
+                className="hidden md:block mx-auto bg-black text-white font-bold p-4 min-w-[4rem] leading-4 rounded-full my-6"
                 onClick={() => navigate("/blog/create")}
               >
                 Add New Blog
+              </button>
+              <button
+                className=" mx-auto text-2xl bg-black text-white font-bold p-3 min-w-[4rem] leading-4 rounded-full my-6"
+                onClick={() => navigate("/blog/create")}
+              >
+                +
               </button>
             </div>
           </div>
@@ -43,7 +49,6 @@ const Home = () => {
             </div>
           ) : (
             blogs.map((el) => {
-              console.log(el.content);
               let firstImg;
               if (el.content)
                 firstImg = el.content.find((m) => m.type === "image");
@@ -59,17 +64,22 @@ const Home = () => {
               return (
                 <div
                   key={el._id}
-                  className="border-b-2 border-gray-300 w-[60vw] min-w-[30rem] md:min-w-[50rem] flex flex-col gap-2 m-1 p-4 pb-6 mx-auto cursor-pointer"
+                  className="border-b-2 border-gray-300 w-[90vw] md:w-[60vw] md:min-w-[50rem] flex flex-col gap-2 m-1 p-4 pb-6 mx-auto cursor-pointer"
                   onClick={() => {
                     navigate("/blog/" + el._id);
                   }}
                 >
                   <div className="flex flex-col w-full items-start font-bold">
-                    <h1 className="text-black-600 text-[2rem] ">{el.title}</h1>
+                    <h1 className="text-black-600 text-[2rem] leading-10 ">
+                      {el.title}
+                    </h1>
                   </div>
                   <div className="flex gap-2 w-full items-start font-bold">
                     {el.tags?.map((tag, index) => (
-                      <h1 className="text-black-600 text-md cursor-pointer hover:underline">
+                      <h1
+                        className="text-black-600 text-md cursor-pointer hover:underline"
+                        key={index}
+                      >
                         {"#" + tag}
                       </h1>
                     ))}
