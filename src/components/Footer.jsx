@@ -23,14 +23,14 @@ function Footer() {
       }`}
     >
       <div className="w-[90vw] h-[13vh] flex justify-center items-center">
-        <h1 className="text-white text-2xl">
+        <h1 className="text-white text-md md:text-2xl">
           Designed and developed by{" "}
           <a
             href="https://github.com/5ujan"
             target="_blank"
-            className="hover:underline text-white"
+            className="hover:underline text-gray-400"
           >
-            Yours Truly
+            yours truly
           </a>
         </h1>
       </div>
