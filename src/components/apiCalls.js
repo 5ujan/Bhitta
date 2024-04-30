@@ -29,7 +29,7 @@ const postBlog = async ({ title, content, tags }) => {
         },
       }
     );
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -45,7 +45,7 @@ const getAllUsers = async () => {
         Authorization: `Bearer ${info.token}`,
       },
     });
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -54,8 +54,8 @@ const getAllUsers = async () => {
 };
 const updateBlog = async ({ blogID, title, content, tags, comments }) => {
   let info = await JSON.parse(localStorage.getItem("info"));
-  console.log(baseUrl + "/blogs/" + blogID);
-  console.log(blogID);
+  // console.log(baseUrl + "/blogs/" + blogID);
+  // console.log(blogID);
   const response = await axios.patch(
     baseUrl + "/blogs/" + blogID,
     { title, content, tags, comments },
@@ -66,19 +66,19 @@ const updateBlog = async ({ blogID, title, content, tags, comments }) => {
       },
     }
   );
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 const deleteBlog = async ({ blogID }) => {
   let info = await JSON.parse(localStorage.getItem("info"));
-  console.log(baseUrl + "/blogs/" + blogID);
+  // console.log(baseUrl + "/blogs/" + blogID);
   const response = await axios.delete(baseUrl + "/blogs/" + blogID, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${info.token}`,
     },
   });
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 const modifyUser = async ({ userID, isAdmin }) => {
@@ -93,20 +93,20 @@ const modifyUser = async ({ userID, isAdmin }) => {
       },
     }
   );
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 const getAllBlogs = async () => {
   const response = await axios.get(baseUrl + "/blogs/all/");
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 const getTaggedBlogs = async (tags) => {
-  console.log("here", tags);
+  // console.log("here", tags);
   const response = await axios.get(
     baseUrl + "/blogs/filter?tags=" + tags.join("+")
   );
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 
@@ -115,7 +115,7 @@ const fetchBlog = async (id) => {
   try {
     const response = await axios.get(baseUrl + "/blogs/" + id);
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {}
 };
@@ -134,7 +134,7 @@ async function fetchData() {
         },
       }
     );
-    console.log(userInfo.data);
+    // console.log(userInfo.data);
     if (userInfo) return userInfo.data;
     else return {};
   }
