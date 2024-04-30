@@ -11,7 +11,7 @@
 - the site is hosted at [Bhitta](https://5ujan.github.io/Bhitta)
 
 ## How to build and run 
-```git clone https://github.com/5ujan/Bhitta.git```  
+```git clone -b localhost https://github.com/5ujan/Bhitta.git```  
  ```
 cd Bhitta
 npm install
