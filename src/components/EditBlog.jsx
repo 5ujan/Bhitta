@@ -121,7 +121,7 @@ const EditBlog = ({ props }) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                setTags([...tags, inputField]);
+                setTags([...tags, inputField.replaceAll(" ", "")]);
                 setInputField("");
               }}
             >
@@ -131,7 +131,7 @@ const EditBlog = ({ props }) => {
                 onChange={(e) => {
                   setInputField(e.target.value);
                 }}
-                placeholder="Add a tag"
+                placeholder="Add a tag (no spaces, spaces will be removed)"
               />
             </form>
           </div>

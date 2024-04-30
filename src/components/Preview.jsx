@@ -117,7 +117,7 @@ const Preview = ({ props }) => {
           <h1 className={`text-black font-bold text-[3rem]`}>
             {title || "This is the title of the post"}
           </h1>
-          <div className="flex items-center">
+          <div className="flex items-center mb-2">
             <h1 className="bg-black text-white rounded-lg p-1 font-bold px-2 ">
               Tags
             </h1>
@@ -125,7 +125,7 @@ const Preview = ({ props }) => {
               {tags?.map((el) => (
                 <h1
                   className="ml-2 text-black font-bold hover:underline cursor-pointer"
-                  onClick={() => navigate("/filter?tags="+el)}
+                  onClick={() => navigate("/filter?tags=" + el)}
                 >
                   {"#" + el}
                 </h1>
