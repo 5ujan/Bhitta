@@ -156,7 +156,7 @@ const SingleBlog = () => {
               <h1 className={`text-gray-900 font-bold text-[3rem]`}>
                 {blog.title || "This is the title of the post"}
               </h1>
-              <div className="flex items-center">
+              <div className="flex items-center mb-2">
                 <h1 className="bg-black text-white rounded-lg p-1 font-bold px-2 ">
                   Tags
                 </h1>
