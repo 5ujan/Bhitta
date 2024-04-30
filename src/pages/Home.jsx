@@ -33,7 +33,7 @@ const Home = () => {
                 Add New Blog
               </button>
               <button
-                className=" mx-auto text-2xl bg-black text-white font-bold p-3 min-w-[4rem] leading-4 rounded-full my-6"
+                className=" md:hidden mx-auto text-2xl bg-black text-white font-bold p-3 min-w-[4rem] leading-4 rounded-full my-6"
                 onClick={() => navigate("/blog/create")}
               >
                 +
