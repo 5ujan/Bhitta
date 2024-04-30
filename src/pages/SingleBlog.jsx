@@ -153,7 +153,9 @@ const SingleBlog = () => {
         <div className="min-h-[80vh] flex  w-[60%] mx-auto justify-evenly gap-4  py-4 px-24">
           <div className=" flex-1 flex flex-col gap-6">
             <div className="flex flex-col">
-              <h1 className={`text-gray-900 font-bold text-[3rem]`}>
+              <h1
+                className={`text-gray-900 font-bold text-[2rem] md:text-[3rem]`}
+              >
                 {blog.title || "This is the title of the post"}
               </h1>
               <div className="flex items-center mb-2">
@@ -161,8 +163,9 @@ const SingleBlog = () => {
                   Tags
                 </h1>
                 <div className="flex-1 flex justify-start">
-                  {blog.tags?.map((el) => (
+                  {blog.tags?.map((el, index) => (
                     <h1
+                      key={index}
                       className="ml-2 text-black font-bold hover:underline cursor-pointer"
                       onClick={() => navigate("/filter?tags=" + el)}
                     >
@@ -195,7 +198,7 @@ const SingleBlog = () => {
           {user && user._id && blog.createdBy.id === user._id && (
             <div className="w-[25vw] flex flex-col gap-3 p-5 ">
               <button
-                className="bg-white border-black border-[2px] border-solid min-w-[10rem] rounded-full text-black font-bold px-4 p-2"
+                className="bg-white border-black border-[2px] border-solid min-w-[5rem] md:min-w-[10rem] rounded-full text-black text-sm md:text-lg font-bold px-4 p-[0.125rem]  md:p-2"
                 onClick={() => {
                   setEdit(true);
                 }}
@@ -203,7 +206,7 @@ const SingleBlog = () => {
                 Edit Blog
               </button>
               <button
-                className="bg-red-600 rounded-full text-white font-bold px-4 p-2"
+                className="bg-red-600 min-w-[5rem] md:min-w-[10rem] text-sm md:text-lg  rounded-full text-white font-bold px-4 p-2"
                 onClick={() => {
                   handleDeletePost(blogID);
                   setTimeout(() => {
@@ -246,9 +249,9 @@ const SingleBlog = () => {
             </button>
           </form>
           <div className="my-[3rem] mb-[10rem]">
-            {blog?.comments?.map((comment) => {
+            {blog?.comments?.map((comment, index) => {
               return (
-                <div className="flex flex-col w-full min-h-[5rem]">
+                <div className="flex flex-col w-full min-h-[5rem]" key={index}>
                   <div className="flex w-full gap-3">
                     <img
                       className="w-[2rem] h-[2rem] rounded-full"

@@ -36,9 +36,9 @@ const Home = () => {
           </div>
         )}
 
-        <div>
+        <div className="min-h-[70vh] mb-[20vh]">
           {!blogs.length ? (
-            <div className="mt-[40vh] h-[60vh] ml-[45vw] ">
+            <div className=" h-[60vh] flex justify-center w-[100vw] ">
               <img src="/loading.gif" alt="" />
             </div>
           ) : (
