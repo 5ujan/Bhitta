@@ -101,17 +101,28 @@ const SingleBlog = () => {
     const now = `${
       new Date().getMonth() + 1
     }/${new Date().getDate()} - ${new Date().getHours()}:${new Date().getMinutes()}`;
-    try {
-      const comment = {
-        text,
-        createdBy: {
-          name: user.name,
-          pfp: user.avatar,
-        },
-        createdAt: now,
-      };
+    if(!user||!user.name){
+      console.log(12121)
+      toast.update(hello, {
+        render: "You need to be signed in to post comments",
+        type: "failure",
+        autoClose: 1000,
+        isLoading: false,
+      });
+    }
+    else{
 
-      const updated = await updateBlog({
+      try {
+        const comment = {
+          text,
+          createdBy: {
+            name: user.name,
+            pfp: user.avatar,
+          },
+          createdAt: now,
+        };
+        
+        const updated = await updateBlog({
         blogID,
         ...blog,
         comments: [comment, ...blog.comments],
@@ -135,6 +146,7 @@ const SingleBlog = () => {
     } catch (error) {
       console.log(error);
     }
+  }
   };
 
   useEffect(() => {
