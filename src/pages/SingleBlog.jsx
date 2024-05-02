@@ -157,7 +157,7 @@ const SingleBlog = () => {
     <div className="max-w-[90vw] mx-auto flex flex-col items-center">
       {loading ? (
         <div className=" h-[60vh] ">
-          <img src="/loading.gif" alt="" />
+          <img src="https://raw.githubusercontent.com/5ujan/Bhitta/main/public/loading.gif" alt="" />
         </div>
       ) : edit ? (
         <EditBlog props={blog} />

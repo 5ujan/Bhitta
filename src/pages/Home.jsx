@@ -45,7 +45,7 @@ const Home = () => {
         <div className="min-h-[70vh] mb-[20vh]">
           {!blogs.length ? (
             <div className=" h-[60vh] flex justify-center w-[100vw] ">
-              <img src="/loading.gif" alt="" />
+              <img src="https://raw.githubusercontent.com/5ujan/Bhitta/main/public/loading.gif" alt="" />
             </div>
           ) : (
             blogs.map((el) => {
