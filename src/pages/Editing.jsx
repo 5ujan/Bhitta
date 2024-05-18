@@ -26,7 +26,8 @@ const Editing = () => {
     console.log(formData);
     try {
       const res = await axios.post(
-        "https://bhitta.onrender.com/image/upload/",
+        // "https://bhitta.onrender.com/image/upload/",
+        "https://bhitta-sx20.onrender.com/image/upload",
         // "http://localhost:6173/image/upload/",
         formData,
         {
@@ -38,7 +39,8 @@ const Editing = () => {
       // const res = await axios.get("http://localhost:6173/blogs/all")
       console.log(res.data.image._id);
       const imgResponse = await fetch(
-        "https://bhitta.onrender.com/image/" +
+        // "https://bhitta.onrender.com/image/" +
+        "https://bhitta-sx20.onrender.com/image/"+
           // "http://localhost:6173/image/" +
           res.data.image._id
       );

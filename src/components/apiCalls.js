@@ -1,7 +1,10 @@
 import axios from "axios";
 
 // const baseUrl = "http://localhost:6173";
-const baseUrl = "https://bhitta.onrender.com";
+// const baseUrl = "https://bhitta.onrender.com";
+const baseUrl = "https://bhitta-sx20.onrender.com"
+
+
 
 const getImageData = async (file) => {
   const formData = new FormData();
@@ -125,7 +128,8 @@ async function fetchData() {
   if (info && info.token) {
     let { token, userID } = info;
     let userInfo = await axios.get(
-      "https://bhitta.onrender.com/users/" + userID,
+      // "https://bhitta.onrender.com/users/" + userID,
+      "https://bhitta-sx20.onrender.com/users/" + userID,
       {
         // let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
         headers: {
