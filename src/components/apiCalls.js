@@ -129,7 +129,7 @@ async function fetchData() {
     let { token, userID } = info;
     let userInfo = await axios.get(
       // "https://bhitta.onrender.com/users/" + userID,
-      "https://bhitta-sx20.onrender.com/users/" + userID,
+      `${baseUrl}/users/` + userID,
       {
         // let userInfo = await axios.get("http://localhost:6173/users/" + userID, {
         headers: {
@@ -145,6 +145,7 @@ async function fetchData() {
 }
 
 export {
+  baseUrl,
   postBlog,
   getImageData,
   getAllBlogs,

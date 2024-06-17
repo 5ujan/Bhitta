@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import EditBlog from "../components/EditBlog";
 import Preview from "../components/Preview";
 import axios from "axios";
+import { baseUrl } from "../components/apiCalls";
 
 const Editing = () => {
   const [isEditing, setIsEditing] = useState(true);
@@ -27,7 +28,7 @@ const Editing = () => {
     try {
       const res = await axios.post(
         // "https://bhitta.onrender.com/image/upload/",
-        "https://bhitta-sx20.onrender.com/image/upload",
+        `${baseUrl}/image/upload`,
         // "http://localhost:6173/image/upload/",
         formData,
         {
@@ -40,7 +41,7 @@ const Editing = () => {
       console.log(res.data.image._id);
       const imgResponse = await fetch(
         // "https://bhitta.onrender.com/image/" +
-        "https://bhitta-sx20.onrender.com/image/"+
+        `${baseUrl}/image/`+
           // "http://localhost:6173/image/" +
           res.data.image._id
       );

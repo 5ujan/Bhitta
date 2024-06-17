@@ -1,10 +1,11 @@
 import bhittaOutline from "../assets/bhitta-outline.png";
-import { fetchData } from "./apiCalls";
+import { fetchData, baseUrl } from "./apiCalls";
 import { CiUser, CiLogout } from "react-icons/ci";
 import { PiUserSwitchThin } from "react-icons/pi";
 import { useGlobalContext } from "./Context";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 
 export default function Nav() {
   const { user, setUser } = useGlobalContext();
@@ -22,7 +23,8 @@ export default function Nav() {
   }, []);
   const handleLogout = () => {
     // window.open("https://bhitta.onrender.com/logout", "_self");
-    window.open("https://bhitta-sx20.onrender.com/logout", "_self");
+    window.open(`${baseUrl}/logout`, "_self");
+    
     // https://bhitta-sx20.onrender.com
     // window.open("http://localhost:6173/logout", "_self");
     localStorage.removeItem("info");
@@ -30,7 +32,7 @@ export default function Nav() {
   const handleLogin = async () => {
     const authWindow = window.open(
       // "https://bhitta.onrender.com/auth/google",
-      "https://bhitta-sx20.onrender.com/auth/google",
+      `${baseUrl}/auth/google`,
       // "http://localhost:6173/auth/google",
       "_blank",
       "width=600, height=400"
