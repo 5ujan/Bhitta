@@ -2,7 +2,8 @@ import axios from "axios";
 
 // const baseUrl = "http://localhost:6173";
 // const baseUrl = "https://bhitta.onrender.com";
-const baseUrl = "https://bhitta-sx20.onrender.com"
+// const baseUrl = "https://bhitta-sx20.onrender.com"
+const baseUrl = 'https://bhitta-ufrp.onrender.com'
 
 
 
