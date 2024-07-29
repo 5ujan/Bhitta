@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <div className="max-w-[90vw] mx-auto">
       <div className="min-h-[80vh]">
-        {user && user.name && (
+        {user && user.name ? (
           <div className="w-[90vw] mx-auto flex justify-around items-center ">
             <h1 className="text-lg">
               Have something you want to share with the world?
@@ -40,7 +40,11 @@ const Home = () => {
               </button>
             </div>
           </div>
-        )}
+        ):<div className="w-[90vw] mx-auto flex justify-around items-center ">
+        <h1 className="text-lg">
+          Sign in to post blogs
+        </h1></div>
+        }
 
         <div className="min-h-[70vh] mb-[20vh]">
           {!blogs.length ? (
