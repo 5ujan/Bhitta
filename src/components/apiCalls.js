@@ -29,8 +29,7 @@ async function findWorkingBaseUrl(baseUrls, endpoint) {
   const workingBaseUrl = await findWorkingBaseUrl(baseUrls, endpoint);
   if (workingBaseUrl) {
     console.log(`Working base URL found: ${workingBaseUrl}`);
-    // Set your baseUrl here if needed
-    // baseUrl = workingBaseUrl;
+    baseUrl = workingBaseUrl;
   } else {
     console.log("No working base URL found.");
   }
