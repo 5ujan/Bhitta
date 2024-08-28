@@ -1,9 +1,47 @@
 import axios from "axios";
 
-// const baseUrl = "http://localhost:6173";
-const baseUrl = "https://bhitta.onrender.com";
-// const baseUrl = "https://bhitta-sx20.onrender.com"
-// const baseUrl = 'https://bhitta-ufrp.onrender.com'
+let baseUrl = "https://bhitta.onrender.com";
+
+
+const baseUrls = [
+  "https://bhitta.onrender.com",
+  "https://bhitta-sx20.onrender.com",
+  "https://bhitta-ufrp.onrender.com"
+];
+
+const endpoint = "/hello";
+
+async function findWorkingBaseUrl(baseUrls, endpoint) {
+  for (const baseUrl of baseUrls) {
+    try {
+      const response = await fetch(baseUrl + endpoint);
+      if (response.status === 200) {
+        return baseUrl;
+      }
+    } catch (error) {
+      console.error(`Failed to fetch from ${baseUrl}:`, error);
+    }
+  }
+  return null;
+}
+
+(async () => {
+  const workingBaseUrl = await findWorkingBaseUrl(baseUrls, endpoint);
+  if (workingBaseUrl) {
+    console.log(`Working base URL found: ${workingBaseUrl}`);
+    // Set your baseUrl here if needed
+    // baseUrl = workingBaseUrl;
+  } else {
+    console.log("No working base URL found.");
+  }
+})();
+
+
+
+// // const baseUrl = "http://localhost:6173";
+// const baseUrl = "https://bhitta.onrender.com";
+// // const baseUrl = "https://bhitta-sx20.onrender.com"
+// // const baseUrl = 'https://bhitta-ufrp.onrender.com'
 
 
 
